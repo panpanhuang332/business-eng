@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商用英語必備教材</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Serif+Display&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2230;
+    --border: #2a3447;
+    --gold: #c9a84c;
+    --gold-light: #e8c87a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --text: #e6edf3;
+    --text-dim: #8b9ab0;
+    --text-muted: #4a5568;
+    --accent: #4a9eff;
+    --accent-dim: rgba(74,158,255,0.12);
+    --green: #3fb950;
+    --red: #f85149;
+    --red-dim: rgba(248,81,73,0.12);
+    --green-dim: rgba(63,185,80,0.12);
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a0e14 0%, #12192a 60%, #0d1525 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-mark {
+    width: 44px; height: 44px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .header-text h1 span { color: var(--gold); }
+
+  .header-text p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 0.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-dim);
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.92rem;
+    padding: 0.65rem 1.3rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  .tab-badge {
+    display: inline-block;
+    background: var(--gold-dim);
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.1rem 0.4rem;
+    border-radius: 20px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  .section-desc {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+
+  /* ── VOCAB CARDS ── */
+  .vocab-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .vocab-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr 1fr;
+    gap: 0.75rem 1.25rem;
+    align-items: start;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .vocab-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold-dim), 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  .vocab-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    padding-top: 0.3rem;
+    text-align: right;
+  }
+
+  .vocab-informal {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vocab-informal .label {
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .vocab-word-informal {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+
+  .vocab-zh {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+  }
+
+  .vocab-formal {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vocab-formal .label {
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .vocab-word-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .vocab-word-formal {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-family: 'DM Serif Display', serif;
+  }
+
+  .kk {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: var(--surface2);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .speak-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--accent);
+    cursor: pointer;
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .speak-btn:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+  }
+
+  .speak-btn svg { width: 14px; height: 14px; }
+
+  .vocab-example {
+    grid-column: 2 / -1;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    border-left: 2px solid var(--border);
+    padding-left: 0.75rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-top: 0.25rem;
+  }
+
+  .vocab-example .en { color: var(--text); font-style: italic; }
+  .vocab-example .zh { color: var(--text-muted); font-style: normal; font-size: 0.82rem; }
+
+  /* Arrow between informal → formal */
+  .arrow-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1rem;
+    padding-top: 1.2rem;
+  }
+
+  /* ── PHRASES ── */
+  .phrase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .phrase-card:hover { border-color: var(--gold); }
+
+  .phrase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .phrase-en {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    color: var(--gold-light);
+    margin-bottom: 0.35rem;
+  }
+
+  .phrase-zh {
+    font-size: 0.88rem;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .phrase-def {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.9rem;
+    border: 1px solid var(--border);
+  }
+
+  .phrase-def .def-en { color: var(--text); margin-bottom: 0.25rem; }
+  .phrase-def .def-zh { color: var(--text-muted); font-size: 0.83rem; }
+
+  .phrase-example {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    border-left: 2px solid var(--gold-dim);
+    padding-left: 0.75rem;
+  }
+
+  .phrase-example .en { color: var(--text); }
+  .phrase-example .zh { color: var(--text-muted); font-style: normal; font-size: 0.82rem; margin-top: 0.15rem; }
+
+  /* ── SENTENCES ── */
+  .sent-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .sent-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0 1rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sent-table td {
+    background: var(--surface);
+    padding: 0.9rem 1rem;
+    vertical-align: top;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sent-table td:first-child {
+    border-left: 1px solid var(--border);
+    border-radius: var(--radius) 0 0 var(--radius);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    width: 2.5rem;
+    text-align: center;
+  }
+
+  .sent-table td:last-child {
+    border-right: 1px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--text-muted);
+    font-size: 0.83rem;
+  }
+
+  .sent-en { color: var(--text); font-style: italic; margin-bottom: 0.25rem; }
+  .sent-zh { color: var(--text-muted); font-size: 0.82rem; }
+  .sent-key { color: var(--gold-light); font-style: normal; font-weight: 600; }
+
+  /* ── QUIZ ── */
+  .quiz-header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .quiz-stats {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+  }
+
+  .quiz-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'Source Serif 4', serif;
+    transition: all 0.15s;
+    border: none;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: #0d1117;
+    font-weight: 600;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* progress bar */
+  .quiz-progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .question-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .question-block.answered { border-color: var(--border); }
+  .question-block.correct { border-color: var(--green); background: linear-gradient(135deg, var(--surface), #0d1f12); }
+  .question-block.incorrect { border-color: var(--red); background: linear-gradient(135deg, var(--surface), #1f0d0d); }
+
+  .q-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .q-category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .q-text {
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .q-text em {
+    font-style: normal;
+    color: var(--gold-light);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--gold-dim);
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 560px) {
+    .options { grid-template-columns: 1fr; }
+    .vocab-card { grid-template-columns: 1.5rem 1fr; }
+    .vocab-card .vocab-formal { grid-column: 2; }
+  }
+
+  .option-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.88rem;
+    padding: 0.65rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+    color: var(--gold-light);
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  .option-btn.correct-ans {
+    border-color: var(--green);
+    background: var(--green-dim);
+    color: #7ee89a;
+  }
+
+  .option-btn.wrong-ans {
+    border-color: var(--red);
+    background: var(--red-dim);
+    color: #fc8580;
+  }
+
+  .option-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--border);
+    width: 20px; height: 20px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .option-btn.correct-ans .option-letter { background: rgba(63,185,80,0.3); color: #7ee89a; }
+  .option-btn.wrong-ans .option-letter { background: rgba(248,81,73,0.3); color: #fc8580; }
+
+  .q-feedback {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    display: none;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .q-feedback.show { display: flex; }
+  .q-feedback.correct { background: var(--green-dim); color: #7ee89a; border: 1px solid rgba(63,185,80,0.3); }
+  .q-feedback.incorrect { background: var(--red-dim); color: #fc8580; border: 1px solid rgba(248,81,73,0.3); }
+
+  /* result panel */
+  .result-panel {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .result-panel.show { display: block; }
+
+  .result-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin: 0.5rem 0;
+  }
+
+  .result-label { color: var(--text-dim); font-size: 0.9rem; }
+  .result-grade {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+  }
+
+  .grade-a { background: var(--green-dim); color: #7ee89a; }
+  .grade-b { background: var(--gold-dim); color: var(--gold); }
+  .grade-c { background: var(--red-dim); color: #fc8580; }
+
+  /* speak icon SVG */
+  .icon-speak { display: inline-block; }
+
+  /* scrollbar styling */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="logo-mark">BE</div>
+    <div class="header-text">
+      <h1>商用英語 <span>必備教材</span></h1>
+      <p>Business English · Vocabulary · Phrases · Quiz</p>
+    </div>
+  </div>
+  <nav>
+    <button class="tab-btn active" onclick="switchTab('vocab')">📘 單字 <span class="tab-badge">10</span></button>
+    <button class="tab-btn" onclick="switchTab('phrases')">💼 片語 <span class="tab-badge">4</span></button>
+    <button class="tab-btn" onclick="switchTab('sentences')">✍️ 例句 <span class="tab-badge">14</span></button>
+    <button class="tab-btn" onclick="switchTab('quiz')">🎯 測驗 <span class="tab-badge">30題</span></button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════════════ TAB 1: VOCAB ═══════════════ -->
+<div id="tab-vocab" class="tab-panel active">
+  <h2 class="section-title">單字對照</h2>
+  <p class="section-desc">口語 → 正式商務用語對照；超出基礎程度的單字附有 KK 音標與🔊發音</p>
+
+  <div class="vocab-grid" id="vocab-container"></div>
+</div>
+
+<!-- ═══════════════ TAB 2: PHRASES ═══════════════ -->
+<div id="tab-phrases" class="tab-panel">
+  <h2 class="section-title">商用慣用片語</h2>
+  <p class="section-desc">四組常見商用英語慣用語，含定義、中文解釋與例句</p>
+  <div id="phrases-container"></div>
+</div>
+
+<!-- ═══════════════ TAB 3: SENTENCES ═══════════════ -->
+<div id="tab-sentences" class="tab-panel">
+  <h2 class="section-title">例句彙整</h2>
+  <p class="section-desc">所有單字與片語的例句，關鍵詞彙以金色標示</p>
+  <table class="sent-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>英文例句</th>
+        <th>中文翻譯</th>
+      </tr>
+    </thead>
+    <tbody id="sent-tbody"></tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ TAB 4: QUIZ ═══════════════ -->
+<div id="tab-quiz" class="tab-panel">
+  <h2 class="section-title">選擇題測驗</h2>
+  <p class="section-desc">共 30 題，涵蓋單字、片語、例句克漏字與語義理解</p>
+
+  <div class="quiz-header">
+    <div class="quiz-stats">
+      <div class="stat">
+        <div class="stat-num" id="stat-answered">0</div>
+        <div class="stat-label">已作答</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-correct">0</div>
+        <div class="stat-label">答對</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-score">—</div>
+        <div class="stat-label">分數</div>
+      </div>
+    </div>
+    <div class="quiz-actions">
+      <button class="btn btn-gold" onclick="submitQuiz()">繳交測驗</button>
+      <button class="btn btn-outline" onclick="resetQuiz()">重新作答</button>
+    </div>
+  </div>
+
+  <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-label">您的成績</div>
+    <div class="result-score" id="result-score">0 / 30</div>
+    <div class="result-label" id="result-pct"></div>
+    <div class="result-grade" id="result-grade"></div>
+  </div>
+
+  <div id="quiz-container"></div>
+</div>
+
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+
+const vocab = [
+  {
+    num: 1,
+    informal: 'got',
+    formal: 'received',
+    zh: '收到',
+    kk: '/rɪˈsivd/',
+    needKK: true,
+    example_en: 'I received your email.',
+    example_zh: '我收到你的信件。',
+  },
+  {
+    num: 2,
+    informal: 'need',
+    formal: 'require',
+    zh: '需要',
+    kk: '/rɪˈkwaɪr/',
+    needKK: true,
+    example_en: 'I require some assistance.',
+    example_zh: '我需要一些幫助。',
+  },
+  {
+    num: 3,
+    informal: 'talk about',
+    formal: 'discuss',
+    zh: '討論',
+    kk: '/dɪˈskʌs/',
+    needKK: true,
+    example_en: 'We will discuss the proposal at the meeting.',
+    example_zh: '我們將在會議上討論這項提議。',
+  },
+  {
+    num: 4,
+    informal: 'get in touch',
+    formal: 'contact',
+    zh: '聯絡',
+    kk: '/ˈkɑntækt/',
+    needKK: false,
+    example_en: 'How can I contact her?',
+    example_zh: '我如何聯繫到她？',
+  },
+  {
+    num: 5,
+    informal: 'make sure',
+    formal: 'ensure',
+    zh: '確保',
+    kk: '/ɪnˈʃʊr/',
+    needKK: true,
+    example_en: 'We have to ensure that this kind of accident will not happen again.',
+    example_zh: '我們必須確保此類事故不會再發生。',
+  },
+  {
+    num: 6,
+    informal: 'give travel plans',
+    formal: 'provide itinerary',
+    zh: '提供行程表',
+    kk: '/aɪˈtɪnəˌrɛri/',
+    needKK: true,
+    kkWord: 'itinerary',
+    speakWord: 'itinerary',
+    example_en: 'Please provide her with your itinerary.',
+    example_zh: '請提供她妳的行程表。',
+  },
+  {
+    num: 7,
+    informal: 'let them know',
+    formal: 'inform',
+    zh: '告知',
+    kk: '/ɪnˈfɔrm/',
+    needKK: true,
+    example_en: 'I informed my boss that I was going to be away next week.',
+    example_zh: '我告知老闆下周我不在。',
+  },
+  {
+    num: 8,
+    informal: 'tell way',
+    formal: 'explain',
+    zh: '解釋',
+    kk: '/ɪkˈsplen/',
+    needKK: true,
+    example_en: 'Please explain your decision.',
+    example_zh: '請解釋你的選擇。',
+  },
+  {
+    num: 9,
+    informal: 'talk more',
+    formal: 'elaborate',
+    zh: '詳述',
+    kk: '/ɪˈlæbəˌret/',
+    needKK: true,
+    example_en: 'The minister did not elaborate on his plan.',
+    example_zh: '部長沒有詳細說明他的計畫。',
+  },
+  {
+    num: 10,
+    informal: 'fix the problem',
+    formal: 'solve the problem',
+    zh: '解決問題',
+    kk: '/sɑlv/',
+    needKK: false,
+    example_en: 'How are you going to solve this problem?',
+    example_zh: '你將如何解決這個問題？',
+  },
+];
+
+const phrases = [
+  {
+    en: 'Back to the drawing board',
+    zh: '（失敗後）重新開始，從頭再來',
+    def_en: 'To go "back to the drawing board" means to start again from the beginning with a completely new idea.',
+    def_zh: '「推倒重來」意味著從頭開始，提出一個全新的想法。',
+    ex_en: "The client hated your proposal so we'll have to go back to the drawing board.",
+    ex_zh: '客戶不喜歡你的提案，所以我們必須從頭再來。',
+  },
+  {
+    en: 'Cut to the chase',
+    zh: '切入正題，開門見山',
+    def_en: 'To "cut to the chase" means to get to the point without wasting time.',
+    def_zh: '「開門見山」的意思是「不浪費時間，直奔主題」。',
+    ex_en: "Let's cut to the chase: are you going to finish the report on time, or not?",
+    ex_zh: '切入正題吧：你可否準時完成這個報告呢？',
+  },
+  {
+    en: 'Go the extra mile',
+    zh: '加倍努力，付出額外努力',
+    def_en: 'To "go the extra mile" is to put more effort into a task in order to gain a result which is even better than necessary.',
+    def_zh: '「付出額外努力」是指在完成任務時投入更多精力，以獲得比預期更好的結果。',
+    ex_en: 'We always go the extra mile for our customers.',
+    ex_zh: '我們總是對我們的客戶付出加倍的努力。',
+  },
+  {
+    en: 'Touch base with',
+    zh: '與…取得聯繫',
+    def_en: 'To "touch base" with someone is to talk to them, whether digitally or in person, usually briefly.',
+    def_zh: '與某人「聯繫」是指與他們交談，無論是透過網路還是當面，通常是簡短的交談。',
+    ex_en: 'If you could just touch base with Mark after the meeting, that would be great.',
+    ex_zh: '如果你可以在會議後與馬克取得聯繫，那就太好了。',
+  },
+];
+
+const allSentences = [
+  { en: 'I <em>received</em> your email.', zh: '我收到你的信件。', key: 'received' },
+  { en: 'I <em>require</em> some assistance.', zh: '我需要一些幫助。', key: 'require' },
+  { en: 'We will <em>discuss</em> the proposal at the meeting.', zh: '我們將在會議上討論這項提議。', key: 'discuss' },
+  { en: 'How can I <em>contact</em> her?', zh: '我如何聯繫到她？', key: 'contact' },
+  { en: 'We have to <em>ensure</em> that this kind of accident will not happen again.', zh: '我們必須確保此類事故不會再發生。', key: 'ensure' },
+  { en: 'Please <em>provide</em> her with your <em>itinerary</em>.', zh: '請提供她妳的行程表。', key: 'provide / itinerary' },
+  { en: 'I <em>informed</em> my boss that I was going to be away next week.', zh: '我告知老闆下周我不在。', key: 'informed' },
+  { en: 'Please <em>explain</em> your decision.', zh: '請解釋你的選擇。', key: 'explain' },
+  { en: 'The minister did not <em>elaborate</em> on his plan.', zh: '部長沒有詳細說明他的計畫。', key: 'elaborate' },
+  { en: 'How are you going to <em>solve</em> this problem?', zh: '你將如何解決這個問題？', key: 'solve' },
+  { en: "The client hated your proposal so we'll have to go <em>back to the drawing board</em>.", zh: '客戶不喜歡你的提案，所以我們必須從頭再來。', key: 'back to the drawing board' },
+  { en: "Let's <em>cut to the chase</em>: are you going to finish the report on time, or not?", zh: '切入正題吧：你可否準時完成這個報告呢？', key: 'cut to the chase' },
+  { en: 'We always <em>go the extra mile</em> for our customers.', zh: '我們總是對我們的客戶付出加倍的努力。', key: 'go the extra mile' },
+  { en: 'If you could just <em>touch base with</em> Mark after the meeting, that would be great.', zh: '如果你可以在會議後與馬克取得聯繫，那就太好了。', key: 'touch base with' },
+];
+
+const questions = [
+  // ── Vocabulary meaning ──────────────────────────────────────────────────
+  { cat: '單字語義', q: '下列哪個單字是「got（收到）」的正式商務說法？', opts: ['receive', 'require', 'inform', 'ensure'], ans: 0, exp: '"received" 是 "got" 的正式說法，均表示「收到」。' },
+  { cat: '單字語義', q: '下列哪個單字與 "need" 意思最接近且更為正式？', opts: ['elaborate', 'require', 'contact', 'explain'], ans: 1, exp: '"require" 是 "need" 的正式說法，均表示「需要」。' },
+  { cat: '單字語義', q: '"discuss" 的中文意思是什麼？', opts: ['聯絡', '確保', '討論', '解釋'], ans: 2, exp: '"discuss" 意為「討論」，是 "talk about" 的正式說法。' },
+  { cat: '單字語義', q: '"ensure" 的中文意思是什麼？', opts: ['告知', '確保', '解釋', '詳述'], ans: 1, exp: '"ensure" 意為「確保」，是 "make sure" 的正式說法。' },
+  { cat: '單字語義', q: '"elaborate" 的中文意思是什麼？', opts: ['聯絡', '解釋', '確保', '詳述'], ans: 3, exp: '"elaborate" 意為「詳述、詳細說明」，是 "talk more" 的正式說法。' },
+  { cat: '單字語義', q: '下列哪個單字意思是「告知」？', opts: ['ensure', 'explain', 'inform', 'solve'], ans: 2, exp: '"inform" 意為「告知」，是 "let them know" 的正式說法。' },
+  { cat: '單字語義', q: '"itinerary" 是什麼意思？', opts: ['行程表', '提議', '助理', '決策'], ans: 0, exp: '"itinerary" 意為「行程表」，發音 /aɪˈtɪnəˌrɛri/。' },
+  { cat: '單字語義', q: '"explain" 的口語說法是什麼？', opts: ['get in touch', 'tell way', 'talk more', 'make sure'], ans: 1, exp: '"tell way（解釋方法）" 的正式說法是 "explain"。' },
+  { cat: '單字語義', q: '哪個選項最適合替換句中的 "get in touch with her"？', opts: ['explain to her', 'inform her', 'contact her', 'ensure her'], ans: 2, exp: '"get in touch" 的正式說法是 "contact"，意為「聯絡」。' },
+  { cat: '單字語義', q: '"solve the problem" 的口語說法是？', opts: ['fix the problem', 'tell way', 'go the extra mile', 'inform the problem'], ans: 0, exp: '"fix the problem" 與 "solve the problem" 同義，均表示「解決問題」。' },
+
+  // ── Fill in the blank ────────────────────────────────────────────────────
+  { cat: '克漏字', q: 'I _____ your email this morning. Please allow me some time to review it.', opts: ['required', 'discussed', 'received', 'informed'], ans: 2, exp: '"received" 表示「收到」，此句意為「我今早收到了您的電子郵件。」' },
+  { cat: '克漏字', q: 'We will _____ the proposal at the meeting tomorrow.', opts: ['ensure', 'discuss', 'elaborate', 'solve'], ans: 1, exp: '"discuss" 意為「討論」，後接名詞或主題。' },
+  { cat: '克漏字', q: 'Please _____ her with your _____ before the trip.', opts: ['provide / itinerary', 'inform / discussion', 'contact / proposal', 'ensure / elaboration'], ans: 0, exp: '"provide someone with something" 表示「提供某人某物」；"itinerary" 是「行程表」。' },
+  { cat: '克漏字', q: 'I _____ my boss that I was going to be away next week.', opts: ['elaborated', 'informed', 'discussed', 'ensured'], ans: 1, exp: '"inform someone that…" 表示「告知某人…」。' },
+  { cat: '克漏字', q: 'Please _____ your decision. We need to understand your reasoning.', opts: ['ensure', 'elaborate', 'explain', 'inform'], ans: 2, exp: '"explain your decision" 表示「解釋你的決定」。' },
+  { cat: '克漏字', q: 'The minister did not _____ on his plan during the press conference.', opts: ['elaborate', 'explain', 'ensure', 'contact'], ans: 0, exp: '"elaborate on something" 表示「詳細說明某事」，後接 on。' },
+  { cat: '克漏字', q: 'We have to _____ that this kind of accident will not happen again.', opts: ['inform', 'elaborate', 'ensure', 'receive'], ans: 2, exp: '"ensure that…" 表示「確保…」，後接 that 子句。' },
+  { cat: '克漏字', q: 'How are you going to _____ this problem before the deadline?', opts: ['elaborate', 'ensure', 'inform', 'solve'], ans: 3, exp: '"solve a problem" 意為「解決問題」。' },
+  { cat: '克漏字', q: 'I _____ some assistance with the quarterly report.', opts: ['require', 'receive', 'contact', 'discuss'], ans: 0, exp: '"require assistance" 表示「需要幫助」，是 "need help" 的正式說法。' },
+  { cat: '克漏字', q: 'How can I _____ the project manager regarding the delay?', opts: ['elaborate', 'solve', 'contact', 'ensure'], ans: 2, exp: '"contact someone" 表示「聯絡某人」，是 "get in touch with" 的正式說法。' },
+
+  // ── Phrases ──────────────────────────────────────────────────────────────
+  { cat: '慣用片語', q: '"Back to the drawing board" 的中文意思是？', opts: ['切入正題', '從頭再來', '加倍努力', '取得聯繫'], ans: 1, exp: '"Back to the drawing board" 意為「（失敗後）重新開始，從頭再來」。' },
+  { cat: '慣用片語', q: '"Cut to the chase" 的中文意思是？', opts: ['加倍努力', '取得聯繫', '切入正題', '重新開始'], ans: 2, exp: '"Cut to the chase" 意為「切入正題、開門見山」，不浪費時間直奔主題。' },
+  { cat: '慣用片語', q: '"Go the extra mile" 的中文意思是？', opts: ['加倍努力', '切入正題', '取得聯繫', '解決問題'], ans: 0, exp: '"Go the extra mile" 意為「付出額外努力、加倍努力」，以獲得更好的結果。' },
+  { cat: '慣用片語', q: '"Touch base with" 的中文意思是？', opts: ['從頭再來', '加倍努力', '切入正題', '與…取得聯繫'], ans: 3, exp: '"Touch base with someone" 意為「與某人取得聯繫」，通常是短暫的溝通。' },
+  { cat: '慣用片語', q: '老闆說"Let\'s cut to the chase." 他的意思是？', opts: ['讓我們重新開始', '讓我們直接說重點', '讓我們加倍努力', '讓我們聯繫客戶'], ans: 1, exp: '"Cut to the chase" 是「直接說重點」，老闆想跳過閒話直接進入主題。' },
+  { cat: '慣用片語', q: '客戶拒絕了提案，主管說"We have to go back to the drawing board." 這代表？', opts: ['我們要更努力推銷', '我們要再次聯絡客戶', '我們必須重新設計提案', '我們要解釋決定'], ans: 2, exp: '"Back to the drawing board" 表示必須完全重頭開始設計新方案。' },
+  { cat: '慣用片語', q: '下列哪個片語最適合填入：We need someone who will _____ for our clients.', opts: ['cut to the chase', 'go the extra mile', 'touch base with them', 'go back to the drawing board'], ans: 1, exp: '"Go the extra mile" 表示「加倍付出、超越期待」，適合描述對客戶的服務態度。' },
+  { cat: '慣用片語', q: '會議後想簡短與同事確認進度，可說？', opts: ["Let's discuss this proposal.", "Could you touch base with me after the meeting?", "Please elaborate on your decision.", "We need to go back to the drawing board."], ans: 1, exp: '"Touch base with someone" 指與人進行簡短聯繫或確認，非常適合會後的跟進。' },
+  { cat: '慣用片語', q: '"Back to the drawing board" 這個片語源自於哪個概念？', opts: ['重新繪製圖紙，重新設計', '回到辦公桌工作', '回到黑板上上課', '重新閱讀企劃書'], ans: 0, exp: 'drawing board 是「繪圖板」，設計師若失敗就必須在繪圖板上重新設計，引申為「從頭開始」。' },
+  { cat: '慣用片語', q: '同事說 "I\'d like to touch base with you about the project." 他的意思是？', opts: ['他想詳細討論整個專案', '他想簡短確認一下專案狀況', '他要你重做專案', '他覺得你加倍努力了'], ans: 1, exp: '"Touch base" 通常指簡短、非正式的溝通或確認，不是長篇大論的討論。' },
+];
+
+// ── RENDER VOCAB ──────────────────────────────────────────────────────────
+function speakerIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
+}
+
+function speak(word) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(word);
+    utt.lang = 'en-US';
+    utt.rate = 0.85;
+    window.speechSynthesis.speak(utt);
+  }
+}
+
+const vocabContainer = document.getElementById('vocab-container');
+vocab.forEach(v => {
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+
+  const speakWord = v.speakWord || v.formal;
+  const kkHTML = v.needKK
+    ? `<span class="kk">${v.kk}</span>
+       <button class="speak-btn" onclick="speak('${speakWord}')" title="美式發音">${speakerIcon()}</button>`
+    : '';
+
+  card.innerHTML = `
+    <div class="vocab-num">${String(v.num).padStart(2,'0')}</div>
+    <div class="vocab-informal">
+      <span class="label">口語</span>
+      <span class="vocab-word-informal">${v.informal}</span>
+      <span class="vocab-zh">${v.zh}</span>
+    </div>
+    <div class="vocab-formal">
+      <span class="label">✦ 正式商務</span>
+      <div class="vocab-word-row">
+        <span class="vocab-word-formal">${v.formal}</span>
+        ${kkHTML}
+      </div>
+    </div>
+    <div class="vocab-example">
+      <div class="en">${v.example_en}</div>
+      <div class="zh">${v.example_zh}</div>
+    </div>
+  `;
+  vocabContainer.appendChild(card);
+});
+
+// ── RENDER PHRASES ────────────────────────────────────────────────────────
+const phrasesContainer = document.getElementById('phrases-container');
+phrases.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'phrase-card';
+  card.innerHTML = `
+    <div class="phrase-num">PHRASE ${String(i+1).padStart(2,'0')}</div>
+    <div class="phrase-en">${p.en}</div>
+    <div class="phrase-zh">${p.zh}</div>
+    <div class="phrase-def">
+      <div class="def-en">${p.def_en}</div>
+      <div class="def-zh">${p.def_zh}</div>
+    </div>
+    <div class="phrase-example">
+      <div class="en">${p.ex_en}</div>
+      <div class="zh">${p.ex_zh}</div>
+    </div>
+  `;
+  phrasesContainer.appendChild(card);
+});
+
+// ── RENDER SENTENCES ──────────────────────────────────────────────────────
+const sentTbody = document.getElementById('sent-tbody');
+allSentences.forEach((s, i) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${i+1}</td>
+    <td><div class="sent-en">${s.en}</div></td>
+    <td class="sent-zh">${s.zh}</td>
+  `;
+  sentTbody.appendChild(tr);
+});
+
+// ── QUIZ ──────────────────────────────────────────────────────────────────
+const userAnswers = new Array(questions.length).fill(null);
+let submitted = false;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  questions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'question-block';
+    block.id = `q-${qi}`;
+
+    const letters = ['A', 'B', 'C', 'D'];
+    const optsHTML = q.opts.map((opt, oi) => `
+      <button class="option-btn" id="opt-${qi}-${oi}" onclick="selectAnswer(${qi}, ${oi})">
+        <span class="option-letter">${letters[oi]}</span>${opt}
+      </button>
+    `).join('');
+
+    block.innerHTML = `
+      <div class="q-meta">
+        <span class="q-num">Q${String(qi+1).padStart(2,'0')}</span>
+        <span class="q-category">${q.cat}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${optsHTML}</div>
+      <div class="q-feedback" id="fb-${qi}"></div>
+    `;
+    container.appendChild(block);
+  });
+  updateStats();
+}
+
+function selectAnswer(qi, oi) {
+  if (submitted) return;
+  if (userAnswers[qi] !== null) return; // already answered
+
+  userAnswers[qi] = oi;
+  const letters = ['A','B','C','D'];
+  questions[qi].opts.forEach((_, i) => {
+    const btn = document.getElementById(`opt-${qi}-${i}`);
+    btn.disabled = true;
+    if (i === questions[qi].ans) btn.classList.add('correct-ans');
+    if (i === oi && i !== questions[qi].ans) btn.classList.add('wrong-ans');
+  });
+
+  const fb = document.getElementById(`fb-${qi}`);
+  if (oi === questions[qi].ans) {
+    fb.className = 'q-feedback correct show';
+    fb.innerHTML = `✓ 正確！${questions[qi].exp}`;
+  } else {
+    fb.className = 'q-feedback incorrect show';
+    fb.innerHTML = `✗ 答案是 ${letters[questions[qi].ans]}. ${questions[qi].exp}`;
+  }
+
+  updateStats();
+}
+
+function updateStats() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  const correct = userAnswers.filter((a, i) => a === questions[i].ans).length;
+  document.getElementById('stat-answered').textContent = answered;
+  document.getElementById('stat-correct').textContent = correct;
+  document.getElementById('stat-score').textContent = answered > 0 ? Math.round(correct/answered*100)+'%' : '—';
+  document.getElementById('progress-fill').style.width = (answered / questions.length * 100) + '%';
+}
+
+function submitQuiz() {
+  submitted = true;
+  const answered = userAnswers.filter(a => a !== null).length;
+  const correct = userAnswers.filter((a, i) => a === questions[i].ans).length;
+  const pct = Math.round(correct / questions.length * 100);
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('result-score').textContent = `${correct} / ${questions.length}`;
+  document.getElementById('result-pct').textContent = `正確率 ${pct}%`;
+
+  const gradeEl = document.getElementById('result-grade');
+  if (pct >= 80) { gradeEl.textContent = '🏆 優秀 Excellent'; gradeEl.className = 'result-grade grade-a'; }
+  else if (pct >= 60) { gradeEl.textContent = '👍 良好 Good'; gradeEl.className = 'result-grade grade-b'; }
+  else { gradeEl.textContent = '📚 繼續加油 Keep Studying'; gradeEl.className = 'result-grade grade-c'; }
+
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // mark unanswered
+  questions.forEach((q, qi) => {
+    if (userAnswers[qi] === null) {
+      const block = document.getElementById(`q-${qi}`);
+      q.opts.forEach((_, i) => {
+        const btn = document.getElementById(`opt-${qi}-${i}`);
+        btn.disabled = true;
+        if (i === q.ans) btn.classList.add('correct-ans');
+      });
+      const fb = document.getElementById(`fb-${qi}`);
+      fb.className = 'q-feedback incorrect show';
+      fb.innerHTML = `— 未作答。正確答案：${'ABCD'[q.ans]}. ${q.exp}`;
+    }
+  });
+  updateStats();
+}
+
+function resetQuiz() {
+  submitted = false;
+  userAnswers.fill(null);
+  document.getElementById('result-panel').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── TAB SWITCHING ────────────────────────────────────────────────────────
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────
+buildQuiz();
+</script>
+</body>
+</html>
